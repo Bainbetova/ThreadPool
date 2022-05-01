@@ -13,15 +13,10 @@ using namespace std;
 
 int main() {
     thread_pool t(1);
-    //int c;
-        // id = 0
-    //t.add_task(void_sum, ref(c), 4, 6); // id = 1
-    auto task_id = t.add_task(int_sum, 2, 3);
-    t.wait_all();
-    auto result = t.calculated(task_id);
-    cout << result << endl;
-    // ThreadPool_WithoutArgument_PrintOk
-    t.add_task(void_without_argument);       // id = 2
+    int c;
+    t.add_task(int_sum, 2, 3); // id = 0
+    t.add_task(void_sum, ref(c), 4, 6); // id = 1
+    t.add_task(void_without_argument); // id = 2
 
     {
         // variant 1
@@ -34,7 +29,7 @@ int main() {
     }
 
     t.wait(1);
-    //cout << c << endl;
+    cout << c << endl;
 
     t.wait_all(); // waiting for task with id 2
 
