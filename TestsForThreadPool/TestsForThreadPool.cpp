@@ -39,6 +39,7 @@ namespace TestsForThreadPool
 			int x = 2, y = 3;
 
 			auto result = t.add_task(int_sum, x, y);
+			t.wait(0);
 
 			Assert::IsTrue(result == 0);
 		}
@@ -92,6 +93,17 @@ namespace TestsForThreadPool
 			bool result = t.calculated(task_id);
 
 			Assert::IsTrue(result == true);
+		}
+
+		TEST_METHOD(TestTaskWithoutWait)
+		{
+			uint32_t NumThreads = 1;
+			thread_pool t(NumThreads);
+			int x = 2, y = 3;
+
+			t.add_task(int_sum, x, y);
+
+			Assert::Fail();
 		}
 	};
 }
